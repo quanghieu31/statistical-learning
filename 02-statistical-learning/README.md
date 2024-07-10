@@ -36,17 +36,16 @@ Often, obtain more accurate predictions using a less flexible method (accounting
 
 ## Assess model accuracy overview (quick)
 
-- Quality of fit: commonly used $\text{MSE}=\frac{1}{n}\sum_{i=1}^n(y_i-\hat{f}(x_i))^2$. We want to know whether unseen test data can make the trained model give lower MSE or lower test MSE. No guarantee that lowest training MSE gives lowest test MSE. The degrees of freedom quantifies the flexibility of a curve (higher df = higher flex). As the flex increases, there is monotone decrease in training MSE and U-shape in test MSE -> maybe overfitting (less flex model might have likely yielded a smaller test MSE)
+- Quality of fit: commonly used $\text{MSE}=\frac{1}{n}\sum_{i=1}^n (y_i-\hat{f}(x_i))^2$. We want to know whether unseen test data can make the trained model give lower MSE or lower test MSE. No guarantee that lowest training MSE gives lowest test MSE. The degrees of freedom quantifies the flexibility of a curve (higher df = higher flex). As the flex increases, there is monotone decrease in training MSE and U-shape in test MSE -> maybe overfitting (less flex model might have likely yielded a smaller test MSE)
 - In practice, one can usually compute the training MSE with relative ease, but estimating the test MSE is considerably more difcult because usually no test data are available. Cross-validation can be used to estimate the test MSE using the training data.
 - Bias-variance trade-off: lower bias, high variance, higher overfit, more flexiable model. 
-    - Expected test MSE is $
-E \left( y_0 - \hat{f}(x_0) \right)^2 = \underbrace{\text{Var}(\hat{f}(x_0))}_{\text{variance of f}} + \underbrace{\left[ \text{Bias}(\hat{f}(x_0)) \right]^2}_{\text{squared bias of f}} + \underbrace{\text{Var}(\epsilon)}_{\text{variance of error}} $
+    - Expected test MSE is $E \left( y_0 - \hat{f}(x_0) \right)^2 = \underbrace{\text{Var}(\hat{f}(x_0))}_{\text{variance of f}} + \underbrace{\left[ \text{Bias}(\hat{f}(x_0)) \right]^2}_{\text{squared bias of f}} + \underbrace{\text{Var}(\epsilon)}_{\text{variance of error}}$
     - This is the avg test MSE if repeatedly estimate $f$ using a large number of training sets (i.e. boostrapping or cross-valid) and tested each at $x_0$ (one singple observation/row). So, doing this for all observations (all $x_i$) and then averaging them is the overall expected test MSE.
     - To get this MSE down, needs both both variance and bias down. The variance of a statistical learning method refers to how much the estimated function $\hat{f}$ would change if we used a different training dataset; higher variance means the model is highly sensitive to the training data. Bias refers to the error introduced by approximating a complex real-life problem with a simpler model; higher bias means the model makes stronger assumptions that simplify the true relationship, often leading to systematic errors. Generally, more flexible methods have higher variance but lower bias, while less flexible methods have lower variance but higher bias.
 
 - The classification examples
 
-Training/test error rate = $ \frac{1}{n} \sum_{i=1}^{n} I(y_i \neq \hat{y}_i) $ in which $I$ is an indicator variable (=1 if different, =0 otherwise). 
+Training/test error rate = $\frac{1}{n} \sum_{i=1}^{n} I(y_i \neq \hat{y}_i)$ in which $I$ is an indicator variable (=1 if different, =0 otherwise). 
 
 Examples:
 
