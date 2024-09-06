@@ -33,3 +33,8 @@ Recommended embedding vector dim calculation:
 - Emb_size = min(50, (n_cat/2)+1) (1)
 - Emb_size: is size of output dimension of an embedding layer.
 - n_cat: is the force of the categorical variable
+
+## Experiment with
+
+LSA, SVD, PCA, t-SNE for learned embedding encoding for categorical variable
+(before trying NN)
