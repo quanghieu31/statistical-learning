@@ -1,5 +1,3 @@
-My notes for 
-
-- "An Introduction to Statistical Learning" (https://www.statlearning.com/)
-- Articles/papers that I think are useful and important
-- Other kinds of readings and practices that I wish I can remember in the long term
+- I write some takeaway notes from "An Introduction to Statistical Learning" (https://www.statlearning.com/)
+- I read papers that I think are useful and important, then try to re-implement some of them
+- Also some notes for other kinds of readings and practices that I wish I can remember in the long term
