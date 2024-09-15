@@ -1,0 +1,18 @@
+principal components are created from data => now, the data is consisted of pc (basically the details/values of features are replaced/no longer be meaningfully interpreted) => reduce by selecting the pc with highest variances/eigenvalues.
+
+PCA finds these components through a process of eigen decomposition of the covariance matrix of the data. The resulting eigenvectors (principal components) define the directions of maximum variance, and the eigenvalues quantify the amount of variance captured by each principal component.
+
+Why Principal Components Differ:
+PC1 captures the direction with the highest variance, PC2 captures the second-highest variance orthogonally to PC1, and so on.
+=> basically, first find direction with higest variance, then choose something else orthogonally to PC1, then this is PC2, then how to come up with next PC?
+"If you have features representing height and weight, PC1 might capture the direction that combines these features in a way that maximizes variance, such as a linear combination of height and weight. PC2 would then capture the remaining variance in a direction orthogonal to PC1."
+
+https://scikit-learn.org/stable/auto_examples/decomposition/plot_pca_iris.html#sphx-glr-auto-examples-decomposition-plot-pca-iris-py
+
+PCA finds principal components (PCs) that are orthogonal to each other. Each principal component represents a direction in the feature space where the data has maximum variance.
+PC1 is the direction of maximum variance. PC2 is the direction of the next highest variance and is orthogonal to PC1. Similarly, PC3 is orthogonal to both PC1 and PC2, and so on.
+
+info:
+https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
+https://colab.research.google.com/drive/1Pt7-rzcqGYYH0HIlo-RHdBIe5Pu6g0De#scrollTo=mxBQ4dos8D5R
+https://chatgpt.com/c/66e496b7-df68-8000-be1e-a1e1ca64afad
