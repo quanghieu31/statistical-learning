@@ -26,37 +26,35 @@ After cleaning, understanding the variable types carefully
 
 - **principle of the method**: variable ranking involves scoring input variables based on their relevance to the output. high scores indicate valuable variables. this method is a preprocessing step and is computationally efficient, as it only requires computing and sorting scores. even if not optimal, it is robust against overfitting and scales well with large data.
 - **correlation criteria**: for continuous outcomes, the pearson correlation coefficient is used to measure linear relationships between variables and the target. ranking variables by the square of this coefficient (r(i)²) emphasizes linear fit quality. this can be extended to classification problems, linking to criteria like fisher’s criterion or the t-test.
-- **single variable classifiers**: variables can be ranked based on their predictive power using a classifier built with a single variable. metrics like error rate, false positive/negative rates, and roc curves are used to evaluate predictive power.
+- **single variable classifiers (not simply correlation, and for all conti and categ)**: variables can be ranked based on their predictive power using a classifier built with a single variable. metrics like error rate, false positive/negative rates, and roc curves are used to evaluate predictive power.
 - **information theoretic ranking criteria**: mutual information measures the dependency between each variable and the target. estimating mutual information can be challenging, particularly for continuous variables, due to the difficulty in estimating probability densities. discretization or non-parametric methods like parzen windows can be used to approximate these densities.
 
 # 3. Examples/assessment of selecting subsets of variables that together have good predictive power
-as opposed to their individual power
+
+interaction, as opposed to their individual power
 
 ## Can Presumably Redundant Variables Help Each Other?
 
 key concept: variable redundancy and feature selection
 
-**variable ranking**: this is a method used in feature selection to rank variables based on their importance to the model. however, this method can sometimes lead to selecting variables that are redundant (i.e., they don't add new information to the model).
+- **variable ranking**: this is a method used in feature selection to rank variables based on their importance to the model. however, this method can sometimes lead to selecting variables that are redundant (i.e., they don't add new information to the model) => remove multicollinearity first? but what if there are powerful interactions?
+- **redundant subset**: if you pick a bunch of variables that give you the same information, you might end up with a bigger set of features than you need, and this might not improve your model's performance.
 
-**redundant subset**: if you pick a bunch of variables that give you the same information, you might end up with a bigger set of features than you need, and this might not improve your model's performance.
+**Case 1**: imagine two variables (`x1` and `x2`) and we’re trying to classify data points into two classes. In this setup, the variables are iid, which means they’re drawn from the same distribution and also don’t influence each other.
 
-the experiment:
+- **scatter plot**: the data points are plotted based on these two variables, with the classes centered at coordinates (-1, -1) and (1, 1).
 
-**figure 1 (a)**: imagine you've got two variables (let's call them `x1` and `x2`) and you’re trying to classify data points into two classes. in this setup, the variables are independently and identically distributed (i.i.d.), which means they’re drawn from the same distribution and don’t influence each other.
+- **observation**: the scatter plot suggests that each variable on its own might not clearly separate the classes.
 
-**scatter plot**: the data points are plotted based on these two variables, with the classes centered at coordinates (-1, -1) and (1, 1).
+Twist: combining variables improves separation
 
-**observation**: the scatter plot suggests that each variable on its own might not clearly separate the classes.
+**Case 2**: now, what happens if rotate the plot by 45 degrees? this rotation is a clever way of showing that combining these two variables can actually improve class separation.
 
-the twist: combining variables improves separation
+- **improved separation**: after rotation, the separation between the two classes along the x-axis is now better by a factor of √2. this improvement happens because the combination (or averaging) of these two i.i.d. variables reduces the noise (variance) in the data.
 
-**figure 1 (b)**: now, what happens if you rotate the plot by 45 degrees? this rotation is a clever way of showing that combining these two variables can actually improve class separation.
+Conclusion: redundant variables aren’t always redundant!
 
-**improved separation**: after rotation, the separation between the two classes along the x-axis is now better by a factor of √2. this improvement happens because the combination (or averaging) of these two i.i.d. variables reduces the noise (variance) in the data.
-
-conclusion: redundant variables aren’t always redundant!
-
-**why this matters**: even though these variables seem redundant on their own (since they are i.i.d.), combining them can still lead to better performance because of noise reduction. this means that adding variables, even if they seem redundant, can sometimes improve the model by making the class separation clearer.
+- **why this matters**: even though these variables seem redundant on their own (since they are i.i.d.), combining them can still lead to better performance because of noise reduction. this means that adding variables, even if they seem redundant, can sometimes improve the model by making the class separation clearer.
 
 ## How Does Correlation Impact Variable Redundancy?
 
@@ -68,12 +66,12 @@ Correlation and redundancy in variables
 
 Examples:
 
-**figure 2.a**: high correlation along the class center line
+**Case 1**: high correlation along the class center line
 - **setup**: imagine you have two variables, and the class centers (mean positions of each class) are along a line. the variables are highly correlated along this line.
 - **result**: the class distributions are stretched along the class center line (high covariance along this line). because of this correlation, if you combine these two variables (e.g., by summing them), you don’t really gain any additional separation power between the classes compared to using just one variable.
 - **takeaway**: when variables are perfectly correlated along the direction of the class separation, they are truly redundant. adding one doesn’t improve your model’s performance because they both carry the same information.
 
-**figure 2.b**: high correlation perpendicular to the class center line
+**Case 2**: high correlation perpendicular to the class center line
 - **setup**: now, the class centers are still positioned similarly, but the correlation is perpendicular to the class center line.
 - **result**: the covariance (spread) is high in the direction perpendicular to the line joining the class centers. in this case, combining the two variables significantly improves class separation. even though they are correlated, they add complementary information.
 - **takeaway**: here, even though the variables are correlated, they are not redundant. in fact, their combination is more powerful in distinguishing between classes.
@@ -84,32 +82,32 @@ Examples:
 
 **what this means for variable selection**
 
-**be careful with simple correlation-based selection**: if you only look at correlation when selecting variables, you might mistakenly throw away variables that, while correlated, could provide complementary information.
+- **be careful with simple correlation-based selection**: if you only look at correlation when selecting variables, you might mistakenly throw away variables that, while correlated, could provide complementary information.
 
-**use models that consider interactions**: when you have correlated variables, use models that can capture interactions (like decision trees, random forests, or even neural networks) to see if those correlations actually contribute useful information.
+- **use models that consider interactions**: when you have correlated variables, use models that can capture interactions (like decision trees, random forests, or even neural networks) to see if those correlations actually contribute useful information.
 
-**test for redundancy by combining variables**: before dropping correlated variables, try combining them in ways that capture potential complementary information. for instance, consider their sum, difference, or even more complex transformations.
+- **test for redundancy by combining variables**: before dropping correlated variables, try combining them in ways that capture potential complementary information. for instance, consider their sum, difference, or even more complex transformations.
 
-**summary**: correlation alone isn’t a clear indicator of redundancy. correlated variables might seem redundant, but depending on how the correlation aligns with the class structure, they could still provide valuable information. always check how variables interact with each other in the context of your specific problem before deciding to remove them based on correlation alone.
+- **note**: correlation alone isn’t a clear indicator of redundancy. correlated variables might seem redundant, but depending on how the correlation aligns with the class structure, they could still provide valuable information. always check how variables interact with each other in the context of your specific problem before deciding to remove them based on correlation alone.
 
 
 ## Can a Variable that is Useless by Itself be Useful with Others
 
 "One concern about multivariate methods is that they are prone to overfitting. The problem is aggravated when the number of variables to select from is large compared to the number of examples. It is tempting to use a variable ranking method to filter out the least promising variables before using a multivariate method. Still one may wonder whether one could potentially lose some valuable variables through that filtering process"
 
-**can a variable that is useless by itself be useful with others?**
+**Can a variable that is useless by itself be useful with others?**
 
 - **overfitting concern**: multivariate methods can overfit the data, especially if there are many variables compared to the number of examples. filtering out variables before applying these methods might be tempting but can lead to losing potentially valuable variables.
 
-- **example 1: useless by itself but useful together**:
+- **Example 1: useless by itself but useful together**:
   - **scenario**: imagine two variables with identical covariance matrices, where each variable alone doesn’t provide useful separation between classes. however, when both variables are used together, they improve class separability.
   - **figure 3.a**: demonstrates that even though each variable might be “useless” by itself, combining them can lead to better performance.
 
-- **example 2: both variables useless by themselves but useful together**:
+- **Example 2: both variables useless by themselves but useful together**:
   - **scenario**: consider a situation inspired by the xor problem where four gaussian clusters are placed at the corners of a square, and class labels are assigned based on the xor function. here, projections on individual axes offer no class separation, but the classes can be separated effectively in the two-dimensional space.
   - **figure 3.b**: shows that even if two variables don’t provide separation individually (e.g., due to overlapping class densities), using them together can reveal class separability.
 
-**key takeaways**:
+**Takeaways**:
 - **combination of variables**: variables that seem useless individually can provide significant performance improvements when used in combination with others.
 - **complex data structures**: some problems (like xor) require multiple variables to capture complex relationships and separations that single variables cannot reveal.
 
