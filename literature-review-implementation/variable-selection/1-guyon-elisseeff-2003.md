@@ -1,21 +1,23 @@
 **An Introduction to Variable and Feature Selection** by Guyon and Elisseeff (https://www.jmlr.org/papers/volume3/guyon03a/guyon03a.pdf)
 
-Variable and feature selection
+# Quick notes
 
-# Check list
-- **domain knowledge**: use it to create better features if you have it
-- **feature commensurability**: normalize features if they aren't comparable
-- **feature interdependence**: if suspected, expand your feature set with combinations or products of features
-- **pruning variables**: if necessary (for cost, speed, or clarity), prune by creating disjunctive features or weighted sums
-- **feature assessment**: use a variable ranking method to assess features, especially if the number is large
-- **need for a predictor**: if you don’t need a predictor, stop here
-- **data quality**: check for and remove outliers using top-ranked variables if your data may be "dirty"
-- **first steps**: if unsure, start with a linear predictor and explore feature selection methods; compare and refine
-- **exploration**: if resources and ideas allow, compare different feature selection methods and predictors
-- **solution stability**: to improve performance or understanding, resample data and redo the analysis multiple times
+- domain knowledge for feature engineering/creation/removal/transformation
+- normalize features if they aren't comparable
+- feature interdependence: if suspected, expand feature set with combinations or products of features
+- pruning variables: if necessary (for cost, speed, or clarity), prune by creating disjunctive features or weighted sums
+- feature assessment: use a variable ranking method to assess features, especially if the number is large
+- always check for outliers and distribution/skewness and missing data points
+- first steps: if unsure, start with a linear predictor and explore feature selection methods; compare and refine
+- exploration: if resources and ideas allow, compare different feature selection methods and predictors
+- solution stability: to improve performance or understanding, resample data and redo the analysis multiple times
 
-## 1. Determine
-After cleaning, understanding the unique values, and label-encode, onehot-encode if possible, we need to know which variables are categorical in the form of ordinal or non-ordinal values or simply numerical, continuous, or binary.
+# 1. Determine
+
+After cleaning, understanding the variable types carefully 
+
+- for categorical: unique values, and label-encode, onehot-encode if possible, we need to know which variables are categorical in the form of ordinal or non-ordinal values or just binary, or 
+- for numerical, continuous (normalize, standardize if needed)
 
 - how to make sure that categorical data are not encoded with labels that are not ordinal (or simply we want them to be nominal)? one-hot encoded (if few columns), target encoding (replace with a mean computed from target variable, but overfitting), frequency encoding, embedding layers, feature hashing (apply a hash function)
 - why do so? ordinal labels might be misleading because ordinal implies that one category is greater or lesser than another, which can affect the interpretations, while encoding non-ordinal categorical variables as ordinal can imply that some categories are inherently better or worse than others
