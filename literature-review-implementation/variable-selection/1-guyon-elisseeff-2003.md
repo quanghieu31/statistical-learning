@@ -33,7 +33,7 @@ After cleaning, understanding the variable types carefully
 
 interaction, as opposed to their individual power
 
-## Can Presumably Redundant Variables Help Each Other?
+## Can Presumably Redundant iid variables Help Each Other?
 
 key concept: variable redundancy and feature selection
 
@@ -89,6 +89,8 @@ Examples:
 - **test for redundancy by combining variables**: before dropping correlated variables, try combining them in ways that capture potential complementary information. for instance, consider their sum, difference, or even more complex transformations.
 
 - **note**: correlation alone isn’t a clear indicator of redundancy. correlated variables might seem redundant, but depending on how the correlation aligns with the class structure, they could still provide valuable information. always check how variables interact with each other in the context of your specific problem before deciding to remove them based on correlation alone.
+  - "Therefore, in the limit of perfect variable correlation (zero variance in the direction perpendicular to the class center line), single variables provide the same separation as the sum of the two variables. Perfectly correlated variables are truly redundant in the sense that no additional information is gained by adding them."
+  - "One notices that in spite of their great complementarity (in the sense that a perfect separation can be achieved in the two-dimensional space spanned by the two variables), the two variables are (anti-)correlated. More anti-correlation is obtained by making the class centers closer and increasing the ratio of the variances of the class conditional distributions. Very high variable correlation (or anti-correlation) does not mean absence of variable complementarity."
 
 
 ## Can a Variable that is Useless by Itself be Useful with Others
