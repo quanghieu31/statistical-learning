@@ -38,3 +38,7 @@ Recommended embedding vector dim calculation:
 
 LSA, SVD, PCA, t-SNE for learned embedding encoding for categorical variable
 (before trying NN)
+
+## Questions:
+
+- If I have a categorical variable (X) that is non-ordinal, many unique values, and an outcome variable that is continuous, highly skewed (not normally distributed at all), then what kind of testing to use to see if there is any relationship or not?
