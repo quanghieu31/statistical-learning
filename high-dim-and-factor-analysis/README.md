@@ -1,0 +1,1 @@
+Other than matrix-based and stats-based techniques like PCA or SHAP to reduce dimensionality of data, we also want to care about the relationships, correlations, visualizations, charts and so on of data before making any decisions.
