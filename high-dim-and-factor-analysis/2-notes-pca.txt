@@ -16,3 +16,6 @@ info:
 https://scikit-learn.org/stable/modules/generated/sklearn.decomposition.PCA.html
 https://colab.research.google.com/drive/1Pt7-rzcqGYYH0HIlo-RHdBIe5Pu6g0De#scrollTo=mxBQ4dos8D5R
 https://chatgpt.com/c/66e496b7-df68-8000-be1e-a1e1ca64afad
+
+- https://stats.stackexchange.com/questions/2691/making-sense-of-principal-component-analysis-eigenvectors-eigenvalues/140579#140579
+
